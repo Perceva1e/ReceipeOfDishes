@@ -37,7 +37,7 @@ class ItemsAdapter(private var items: MutableList<Item>, private val context: Co
         holder.button.setOnClickListener {
             val intent = Intent(context, ItemActivity::class.java)
             intent.putExtra("itemTitle", item.title)
-            intent.putExtra("itemText", item.text)
+            intent.putExtra("itemIngredient", item.ingredient)
             intent.putExtra("itemInstruction",item.instructions)
             context.startActivity(intent)
         }

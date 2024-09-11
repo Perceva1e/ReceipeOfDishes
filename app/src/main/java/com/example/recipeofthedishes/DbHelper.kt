@@ -27,7 +27,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                 user_id INTEGER,
                 image TEXT,
                 title TEXT,
-                text TEXT,
+                ingredient TEXT,
                 description TEXT,
                 instructions TEXT,
                 FOREIGN KEY(user_id) REFERENCES users(id)
@@ -63,7 +63,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                     put("user_id", userId)
                     put("image", item.image)
                     put("title", item.title)
-                    put("text", item.text)
+                    put("ingredient", item.ingredient)
                     put("description", item.desc)
                     put("instructions", item.instructions)
                 }
@@ -119,7 +119,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                     id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
                     image = cursor.getString(cursor.getColumnIndexOrThrow("image")),
                     title = cursor.getString(cursor.getColumnIndexOrThrow("title")),
-                    text = cursor.getString(cursor.getColumnIndexOrThrow("text")),
+                    ingredient = cursor.getString(cursor.getColumnIndexOrThrow("ingredient")),
                     desc = cursor.getString(cursor.getColumnIndexOrThrow("description")),
                     instructions = cursor.getString(cursor.getColumnIndexOrThrow("instructions"))                )
                 items.add(item)
@@ -135,7 +135,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             put("user_id", userId)
             put("image", item.image)
             put("title", item.title)
-            put("text", item.text)
+            put("ingredient", item.ingredient)
             put("description", item.desc)
             put("instructions", item.instructions)
         }

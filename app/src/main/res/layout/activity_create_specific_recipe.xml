@@ -1,79 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:orientation="vertical"
-    android:background="#F0F0F0"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".CreateSpecificRecipe">
+
+
+    <EditText
+        android:id="@+id/editTextIngredient"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:hint="@string/ingredient"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTitle" />
 
     <EditText
         android:id="@+id/editTextTitle"
         android:layout_width="220dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-        android:ems="10"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
         android:hint="@string/title"
         android:inputType="text"
-        android:textColor="#000000"
-        android:textColorHint="#8C8C8C"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal1"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextImage" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/editTextInstructions"
         android:layout_width="220dp"
         android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:hint="@string/ingredient"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:hint="@string/instructions"
         android:inputType="text"
-        android:textColor="#000000"
-        android:textColorHint="#8C8C8C"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTitle"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDesc" />
+
+    <EditText
+        android:id="@+id/editTextImage"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:hint="@string/image_url"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineHorizontal1" />
+
+    <EditText
+        android:id="@+id/editTextDesc"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:autofillHints=""
+        android:hint="@string/description"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextIngredient" />
 
     <Button
-        android:id="@+id/buttonAddRecipe"
+        android:id="@+id/buttonSaveItem"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:backgroundTint="#0D0243"
         android:text="@string/add_recipe"
         android:textColor="#fdfdfd"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextInstructions" />
 
     <Button
         android:id="@+id/buttonBack"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#CC0202"
         android:text="@string/backward"
         android:textColor="#fdfdfd"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.46"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonAddRecipe"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSaveItem"
+        app:layout_constraintVertical_bias="0.116"
         tools:ignore="MissingConstraints" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -103,5 +133,4 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="50dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout >
+</androidx.constraintlayout.widget.ConstraintLayout>

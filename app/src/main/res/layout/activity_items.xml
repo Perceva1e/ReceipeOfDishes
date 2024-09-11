@@ -25,15 +25,32 @@
 
     <Button
         android:id="@+id/itemListButtonAdd"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#0D0243"
         android:text="@string/add_recipe"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
+        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintWidth_percent="0.5" />
+
+    <Button
+        android:id="@+id/buttonCreateNewRecipe"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#CC0202"
+        android:text="@string/create_recipe"
+        android:textColor="#fdfdfd"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/itemList"

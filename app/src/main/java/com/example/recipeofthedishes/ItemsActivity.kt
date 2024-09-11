@@ -37,6 +37,12 @@ class ItemsActivity : AppCompatActivity() {
             itemList.adapter = ItemsAdapter(items.toMutableList(), this@ItemsActivity)
         }
 
+        val buttonCreateRecipe: Button = findViewById(R.id.buttonCreateNewRecipe)
+        buttonCreateRecipe.setOnClickListener {
+            val intent = Intent(this, CreateSpecificRecipe::class.java)
+            startActivity(intent)
+        }
+
         val buttonAddNewRecipe: Button = findViewById(R.id.itemListButtonAdd)
         buttonAddNewRecipe.setOnClickListener {
             val intent = Intent(this, AddRecipeActivity::class.java)

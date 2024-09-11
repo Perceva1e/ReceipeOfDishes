@@ -22,11 +22,11 @@ class ItemActivity : AppCompatActivity() {
             insets
         }
         val title: TextView = findViewById(R.id.itemListTitleOne)
-        val text:  TextView = findViewById(R.id.itemListTextOne)
+        val ingredient:  TextView = findViewById(R.id.itemListIngredientOne)
         val instruction: TextView = findViewById(R.id.itemListInstruction)
         val backwardButton: Button = findViewById(R.id.itemListButtonOne)
         title.text = intent.getStringExtra("itemTitle")
-        text.text = intent.getStringExtra("itemText")
+        ingredient.text = intent.getStringExtra("itemIngredient")
         instruction.text = intent.getStringExtra("itemInstruction")
         backwardButton.setOnClickListener{
             val intent = Intent(this, ItemsActivity::class.java)
