@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">RecipeOfTheDishes</string>
+    <string name="sing_in_into_account">Sing in into account</string>
+    <string name="input_user_name">Input User Name</string>
+    <string name="input_user_password">Input User Password</string>
+    <string name="singin">SingIn</string>
+    <string name="sing_up_into_account">Sing up account</string>
+    <string name="singup">Sing Up</string>
+    <string name="recipe">Recipe</string>
+    <string name="backward">Backward</string>
+    <string name="lern_more">Lern more</string>
+    <string name="save">Save</string>
+    <string name="image_url">Image URL</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="add_recipe">Add recipe</string>
+    <string name="delete_recipe">Delete recipe</string>
+    <string name="text">Text</string>
+    <string name="input_email">Input Email</string>
+    <string name="textview">TextView</string>
+</resources>
