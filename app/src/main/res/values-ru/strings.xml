@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">РецептыБлюд</string>
+    <string name="sing_in_into_account">Войти в аккаунт</string>
+    <string name="input_user_name">Введите имя пользователя</string>
+    <string name="input_user_password">Введите пароль</string>
+    <string name="singin">Войти</string>
+    <string name="sing_up_into_account">Зарегистрироваться</string>
+    <string name="singup">Регистрация</string>
+    <string name="recipe">Рецепт</string>
+    <string name="backward">Назад</string>
+    <string name="lern_more">Узнать больше</string>
+    <string name="save">Сохранить</string>
+    <string name="image_url">URL изображения</string>
+    <string name="description">Описание</string>
+    <string name="title">Название</string>
+    <string name="add_recipe">Добавить рецепт</string>
+    <string name="delete_recipe">Удалить рецепт</string>
+    <string name="text">Текст</string>
+    <string name="input_email">Введите email</string>
+    <string name="textview">Текстовое поле</string>
+    <string name="instructions">Инструкции</string>
+    <string name="create_recipe">Создать рецепт</string>
+    <string name="ingredient">Ингредиент</string>
+    <string name="change_language">Сменить язык</string>
+</resources>
+

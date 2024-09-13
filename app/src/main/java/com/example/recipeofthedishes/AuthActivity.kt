@@ -8,11 +8,11 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.util.Locale
 
-class AuthActivity : AppCompatActivity() {
+class AuthActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -27,6 +27,7 @@ class AuthActivity : AppCompatActivity() {
         val userName: EditText = findViewById(R.id.UserLoginAuth)
         val userPassword: EditText = findViewById(R.id.UserPasswordAuth)
         val buttonSignIn: Button = findViewById(R.id.buttonAuth)
+        val buttonChangeLanguage: Button = findViewById(R.id.buttonChangeLanguageAuth)
 
         linkToSignUp.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -55,6 +56,12 @@ class AuthActivity : AppCompatActivity() {
                     Toast.makeText(this, "User $checkUserName isn't signed in", Toast.LENGTH_LONG).show()
                 }
             }
+        }
+
+        buttonChangeLanguage.setOnClickListener {
+            val newLanguage = if (Locale.getDefault().language == "en") "ru" else "en"
+            setLocale(newLanguage, this)
+            recreate()
         }
     }
 
