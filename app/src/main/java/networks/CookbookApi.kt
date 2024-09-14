@@ -23,6 +23,6 @@ interface RecipeApiService {
     fun listAllCategories(): Call<CookbookModels.CategoryResponse>
 
     @GET("filter.php")
-    fun filterByMainIngredient(@Query("i") ingredient: String): Call<CookbookModels.MealResponse>
+    fun getMealsByIngredient(@Query("i") ingredient: String): Call<CookbookModels.MealResponse>
 }
 

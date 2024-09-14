@@ -47,6 +47,11 @@ class ItemsActivity : BaseActivity() {
             val intent = Intent(this, AddRecipeActivity::class.java)
             startActivity(intent)
         }
+        val buttonFindByIngredient : Button = findViewById(R.id.findByIngredient)
+        buttonFindByIngredient.setOnClickListener {
+            val intent = Intent(this, FindByIngredient::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun getCurrentUserId(): Int {

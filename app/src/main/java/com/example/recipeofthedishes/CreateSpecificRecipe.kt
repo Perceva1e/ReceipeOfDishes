@@ -35,7 +35,7 @@ class CreateSpecificRecipe : BaseActivity() {
             } else {
                 val dbHelper = DbHelper(this@CreateSpecificRecipe, null)
                 val userId = getCurrentUserId()
-                val newItem = Item(0, image, title, ingredient, desc, instructions)
+                val newItem = Item(0, image, title, ingredient, desc, instructions,"0")
                 dbHelper.addItem(userId, newItem)
 
                 Toast.makeText(

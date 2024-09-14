@@ -52,6 +52,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/findByIngredient"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#0D0243"
+        android:text="@string/find_by_ingredient"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+        app:layout_constraintTop_toBottomOf="@+id/itemListButtonAdd" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/itemList"
         android:layout_width="0dp"
@@ -61,7 +72,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/itemListButtonAdd"
+        app:layout_constraintTop_toBottomOf="@+id/findByIngredient"
         app:layout_constraintVertical_bias="0.442" />
 
     <androidx.constraintlayout.widget.Guideline

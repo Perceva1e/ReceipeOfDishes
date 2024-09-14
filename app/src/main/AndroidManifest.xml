@@ -18,6 +18,12 @@
         android:theme="@style/Theme.RecipeOfTheDishes"
         tools:targetApi="31">
         <activity
+            android:name=".FindByIngredient"
+            android:exported="false" />
+        <activity
+            android:name=".listIngredient"
+            android:exported="false" />
+        <activity
             android:name=".CreateSpecificRecipe"
             android:exported="false" />
         <activity

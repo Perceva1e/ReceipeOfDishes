@@ -30,6 +30,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                 ingredient TEXT,
                 description TEXT,
                 instructions TEXT,
+                video TEXT,
                 FOREIGN KEY(user_id) REFERENCES users(id)
             )
         """
@@ -66,6 +67,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                     put("ingredient", item.ingredient)
                     put("description", item.desc)
                     put("instructions", item.instructions)
+                    put("video", item.video)
                 }
                 db.insert("items", null, itemValues)
             }
@@ -121,7 +123,8 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
                     title = cursor.getString(cursor.getColumnIndexOrThrow("title")),
                     ingredient = cursor.getString(cursor.getColumnIndexOrThrow("ingredient")),
                     desc = cursor.getString(cursor.getColumnIndexOrThrow("description")),
-                    instructions = cursor.getString(cursor.getColumnIndexOrThrow("instructions"))                )
+                    instructions = cursor.getString(cursor.getColumnIndexOrThrow("instructions")),
+                    video = cursor.getString(cursor.getColumnIndexOrThrow("video")))
                 items.add(item)
             } while (cursor.moveToNext())
         }
@@ -138,6 +141,7 @@ class DbHelper(context: Context, factory: SQLiteDatabase.CursorFactory?) :
             put("ingredient", item.ingredient)
             put("description", item.desc)
             put("instructions", item.instructions)
+            put("video", item.video)
         }
         db.insert("items", null, itemValues)
         db.close()

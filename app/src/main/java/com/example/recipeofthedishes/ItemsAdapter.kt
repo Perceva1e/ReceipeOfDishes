@@ -18,6 +18,7 @@ class ItemsAdapter(private var items: MutableList<Item>, private val context: Co
         val title: TextView = view.findViewById(R.id.itemListTitle)
         val descr: TextView = view.findViewById(R.id.itemListDescrOne)
         val button: Button = view.findViewById(R.id.itemListButton)
+        val buttonIngredient : Button = view.findViewById(R.id.buttonListIngredient)
         val deleteButton: Button = view.findViewById(R.id.itemListButtonDelete)
     }
 
@@ -34,10 +35,15 @@ class ItemsAdapter(private var items: MutableList<Item>, private val context: Co
             .load(item.image)
             .into(holder.image)
 
+        holder.buttonIngredient.setOnClickListener{
+            val intent = Intent(context, listIngredient::class.java)
+            intent.putExtra("video",item.video)
+            intent.putExtra("itemIngredient", item.ingredient)
+            context.startActivity(intent)
+        }
         holder.button.setOnClickListener {
             val intent = Intent(context, ItemActivity::class.java)
             intent.putExtra("itemTitle", item.title)
-            intent.putExtra("itemIngredient", item.ingredient)
             intent.putExtra("itemInstruction",item.instructions)
             context.startActivity(intent)
         }

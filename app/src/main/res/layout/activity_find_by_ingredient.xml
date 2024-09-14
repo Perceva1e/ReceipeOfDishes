@@ -1,0 +1,83 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main">
+
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:backgroundTint="#3A3A3A"
+        android:text="@string/backward"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSearch" />
+
+    <EditText
+        android:id="@+id/editTextIngredient"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:autofillHints=""
+        android:hint="@string/enter_ingredient"
+        android:padding="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+        app:layout_constraintTop_toTopOf="@+id/guidelineHorizontal1" />
+
+    <Button
+        android:id="@+id/buttonSearch"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#3A3A3A"
+        android:padding="16dp"
+        android:text="@string/search"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+        app:layout_constraintTop_toBottomOf="@id/editTextIngredient" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonBack"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="50dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="50dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="50dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="50dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
