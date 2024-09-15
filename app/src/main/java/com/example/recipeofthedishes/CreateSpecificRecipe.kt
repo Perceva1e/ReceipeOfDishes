@@ -18,6 +18,7 @@ class CreateSpecificRecipe : BaseActivity() {
         val editTextInstructions: EditText = findViewById(R.id.editTextInstructions)
         val buttonSaveItem: Button = findViewById(R.id.buttonSaveItem)
         val buttonBack: Button = findViewById(R.id.buttonBack)
+        val videoEditText : EditText = findViewById(R.id.editTextVideo)
         buttonBack.setOnClickListener {
             val intent = Intent(this@CreateSpecificRecipe, ItemsActivity::class.java)
             startActivity(intent)
@@ -29,13 +30,13 @@ class CreateSpecificRecipe : BaseActivity() {
             val ingredient = editTextIngredient.text.toString()
             val desc = editTextDesc.text.toString()
             val instructions = editTextInstructions.text.toString()
-
-            if (title.isEmpty() || desc.isEmpty() || image.isEmpty() || instructions.isEmpty() || ingredient.isEmpty()) {
+            val video = videoEditText.text.toString()
+            if (title.isEmpty() || desc.isEmpty() || image.isEmpty() || instructions.isEmpty() || ingredient.isEmpty() || video.isEmpty()) {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_LONG).show()
             } else {
                 val dbHelper = DbHelper(this@CreateSpecificRecipe, null)
                 val userId = getCurrentUserId()
-                val newItem = Item(0, image, title, ingredient, desc, instructions,"0")
+                val newItem = Item(0, image, title, ingredient, desc, instructions,video)
                 dbHelper.addItem(userId, newItem)
 
                 Toast.makeText(

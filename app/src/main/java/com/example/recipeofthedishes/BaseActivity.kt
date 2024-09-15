@@ -3,6 +3,7 @@ package com.example.recipeofthedishes
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Locale
 
@@ -31,5 +32,7 @@ open class BaseActivity : AppCompatActivity() {
         val editor = sharedPreferences.edit()
         editor.putString("My_Lang", language)
         editor.apply()
+        Log.d("BaseActivity", "Locale set to: $language")
     }
+
 }

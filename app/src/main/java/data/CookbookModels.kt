@@ -8,7 +8,7 @@ class CookbookModels {
 
     data class Meal(
         val idMeal: String,
-        val strMeal: String,
+        var strMeal: String,
         val strCategory: String,
         val strArea: String,
         val strInstructions: String,

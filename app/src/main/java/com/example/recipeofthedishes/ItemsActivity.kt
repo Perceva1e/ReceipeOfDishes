@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 class ItemsActivity : BaseActivity() {
 
@@ -51,6 +52,12 @@ class ItemsActivity : BaseActivity() {
         buttonFindByIngredient.setOnClickListener {
             val intent = Intent(this, FindByIngredient::class.java)
             startActivity(intent)
+        }
+        val buttonChangeLanguage : Button = findViewById(R.id.buttonChangeLanguage)
+        buttonChangeLanguage.setOnClickListener {
+            val newLanguage = if (Locale.getDefault().language == "en") "ru" else "en"
+            setLocale(newLanguage, this)
+            recreate()
         }
     }
 

@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">РецептыБлюд</string>
     <string name="sing_in_into_account">Войти в аккаунт</string>
     <string name="input_user_name">Введите имя пользователя</string>
-    <string name="input_user_password">Введите пароль</string>
+    <string name="input_user_password">Введите пароль пользователя</string>
     <string name="singin">Войти</string>
-    <string name="sing_up_into_account">Зарегистрироваться</string>
+    <string name="sing_up_into_account">Зарегистрировать аккаунт</string>
     <string name="singup">Регистрация</string>
     <string name="recipe">Рецепт</string>
     <string name="backward">Назад</string>
@@ -17,11 +16,17 @@
     <string name="add_recipe">Добавить рецепт</string>
     <string name="delete_recipe">Удалить рецепт</string>
     <string name="text">Текст</string>
-    <string name="input_email">Введите email</string>
+    <string name="input_email">Введите Email</string>
     <string name="textview">Текстовое поле</string>
     <string name="instructions">Инструкции</string>
     <string name="create_recipe">Создать рецепт</string>
     <string name="ingredient">Ингредиент</string>
-    <string name="change_language">Сменить язык</string>
+    <string name="change_language">Изменить язык</string>
+    <string name="list_of_ingredient">Список ингредиентов</string>
+    <string name="video">Видео</string>
+    <string name="back_to_list_recipes">Назад к списку рецептов</string>
+    <string name="back_to_recipe">Назад к рецепту</string>
+    <string name="find_by_ingredient">Найти по ингредиенту</string>
+    <string name="enter_ingredient">Введите ингредиент</string>
+    <string name="search">Поиск</string>
 </resources>
-

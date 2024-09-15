@@ -1,3 +1,4 @@
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ class MealAdapter : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
     fun setMeals(meals: List<CookbookModels.Meal>) {
         this.meals = meals
         notifyDataSetChanged()
+        Log.d("MealAdapter", "Meals set: ${meals.map { it.strMeal }}")
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MealViewHolder {
@@ -36,6 +38,7 @@ class MealAdapter : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
         fun bind(meal: CookbookModels.Meal) {
             mealName.text = meal.strMeal
             Glide.with(itemView.context).load(meal.strMealThumb).into(mealImage)
+            Log.d("MealViewHolder", "Binding meal: ${meal.strMeal}")
         }
     }
 }

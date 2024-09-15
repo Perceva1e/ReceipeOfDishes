@@ -23,4 +23,11 @@
     <string name="create_recipe">Create Recipe</string>
     <string name="ingredient">Ingredient</string>
     <string name="change_language">Change language</string>
+    <string name="list_of_ingredient">List of ingredient</string>
+    <string name="video">Video</string>
+    <string name="back_to_list_recipes">Back to list recipes</string>
+    <string name="back_to_recipe">Back to recipe</string>
+    <string name="find_by_ingredient">Find by Ingredient</string>
+    <string name="enter_ingredient">Enter ingredient</string>
+    <string name="search">Search</string>
 </resources>
