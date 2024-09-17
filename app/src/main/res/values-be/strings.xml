@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">РэцэптыСтраў</string>
+    <string name="sing_in_into_account">Увайсці ў акаўнт</string>
+    <string name="input_user_name">Увядзіце імя карыстальніка</string>
+    <string name="input_user_password">Увядзіце пароль карыстальніка</string>
+    <string name="singin">Увайсці</string>
+    <string name="sing_up_into_account">Зарэгістравацца</string>
+    <string name="singup">Рэгістрацыя</string>
+    <string name="recipe">Рэцэпт</string>
+    <string name="backward">Назад</string>
+    <string name="lern_more">Даведацца больш</string>
+    <string name="save">Захаваць</string>
+    <string name="image_url">URL выявы</string>
+    <string name="description">Апісанне</string>
+    <string name="title">Назва</string>
+    <string name="add_recipe">Дадаць рэцэпт</string>
+    <string name="delete_recipe">Выдаліць рэцэпт</string>
+    <string name="text">Тэкст</string>
+    <string name="input_email">Увядзіце электронную пошту</string>
+    <string name="textview">Тэкставы від</string>
+    <string name="instructions">Інструкцыі</string>
+    <string name="create_recipe">Стварыць рэцэпт</string>
+    <string name="ingredient">Інгрэдыент</string>
+    <string name="change_language">Змяніць мову</string>
+    <string name="list_of_ingredient">Спіс інгрэдыентаў</string>
+    <string name="video">Відэа</string>
+    <string name="back_to_list_recipes">Назад да спісу рэцэптаў</string>
+    <string name="back_to_recipe">Назад да рэцэпту</string>
+    <string name="find_by_ingredient">Знайсці па інгрэдыенце</string>
+    <string name="enter_ingredient">Увядзіце інгрэдыент</string>
+    <string name="search">Пошук</string>
+</resources>

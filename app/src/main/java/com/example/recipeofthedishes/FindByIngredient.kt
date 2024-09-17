@@ -21,6 +21,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.Locale
 
 class FindByIngredient : BaseActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -69,8 +70,15 @@ class FindByIngredient : BaseActivity() {
         val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
         val language = sharedPreferences.getString("My_Lang", "")
 
-        if (language == "ru") {
-            translateText("ru", "en", ingredient, object : TranslationCallback {
+        val currentLanguage = Locale.getDefault().language
+        val targetLanguage = when (currentLanguage) {
+            "ru" -> "en"
+            "be" -> "en"
+            else -> "en"
+        }
+
+        if (language == "ru" || language == "be") {
+            translateText(language!!, targetLanguage, ingredient, object : TranslationCallback {
                 override fun onTranslationCompleted(translatedText: String) {
                     searchMeals(translatedText)
                 }
@@ -94,12 +102,11 @@ class FindByIngredient : BaseActivity() {
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.meals?.let { meals ->
-                            val sharedPreferences =
-                                getSharedPreferences("Settings", Context.MODE_PRIVATE)
+                            val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
                             val language = sharedPreferences.getString("My_Lang", "")
-                            if (language == "ru") {
+                            if (language == "ru" || language == "be") {
                                 Log.d("Meals", "Translating meal names")
-                                translateMealNames(meals)
+                                translateMealNames(meals, language!!)
                             } else {
                                 Log.d("Meals", "Setting meals in adapter")
                                 mealAdapter.setMeals(meals)
@@ -107,28 +114,23 @@ class FindByIngredient : BaseActivity() {
                         }
                     } else {
                         Log.e("Meals", "Failed to get meals")
-                        Toast.makeText(
-                            this@FindByIngredient,
-                            "Failed to get meals",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@FindByIngredient, "Failed to get meals", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<CookbookModels.MealResponse>, t: Throwable) {
                     Log.e("Meals", "Error: ${t.message}")
-                    Toast.makeText(this@FindByIngredient, "Error: ${t.message}", Toast.LENGTH_SHORT)
-                        .show()
+                    Toast.makeText(this@FindByIngredient, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
             })
     }
 
-    private fun translateMealNames(meals: List<CookbookModels.Meal>) {
+    private fun translateMealNames(meals: List<CookbookModels.Meal>, language: String) {
         val translatedMeals = mutableListOf<CookbookModels.Meal>()
         var completedRequests = 0
 
         meals.forEach { meal ->
-            translateText("en", "ru", meal.strMeal, object : TranslationCallback {
+            translateText("en", language, meal.strMeal, object : TranslationCallback {
                 override fun onTranslationCompleted(translatedText: String) {
                     meal.strMeal = decodeUnicode(translatedText)
                     translatedMeals.add(meal)
@@ -180,24 +182,15 @@ class FindByIngredient : BaseActivity() {
                     try {
                         when {
                             responseBody?.destinationText != null -> {
-                                Log.d(
-                                    "Translation",
-                                    "Translated Text: ${responseBody.destinationText}"
-                                )
+                                Log.d("Translation", "Translated Text: ${responseBody.destinationText}")
                                 callback.onTranslationCompleted(responseBody.destinationText)
                             }
-
                             responseBody?.translations?.allTranslations != null -> {
-                                Log.d(
-                                    "Translation",
-                                    "All Translations: ${responseBody.translations.allTranslations}"
-                                )
-                                val firstTranslation =
-                                    responseBody.translations.allTranslations[0][0]
+                                Log.d("Translation", "All Translations: ${responseBody.translations.allTranslations}")
+                                val firstTranslation = responseBody.translations.allTranslations[0][0]
                                 Log.d("Translation", "First Translated Text: $firstTranslation")
                                 callback.onTranslationCompleted(firstTranslation.toString())
                             }
-
                             else -> {
                                 Log.e("Translation", "Translation failed: Empty response")
                                 callback.onTranslationFailed("Translation failed: Empty response")
@@ -220,5 +213,4 @@ class FindByIngredient : BaseActivity() {
             }
         })
     }
-
 }

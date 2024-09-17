@@ -55,7 +55,12 @@ class ItemsActivity : BaseActivity() {
         }
         val buttonChangeLanguage : Button = findViewById(R.id.buttonChangeLanguage)
         buttonChangeLanguage.setOnClickListener {
-            val newLanguage = if (Locale.getDefault().language == "en") "ru" else "en"
+            val currentLanguage = Locale.getDefault().language
+            val newLanguage = when (currentLanguage) {
+                "en" -> "ru"
+                "ru" -> "be"
+                else -> "en"
+            }
             setLocale(newLanguage, this)
             recreate()
         }

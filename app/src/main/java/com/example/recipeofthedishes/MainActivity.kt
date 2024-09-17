@@ -52,10 +52,15 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        buttonChangeLanguage.setOnClickListener {
-            val newLanguage = if (Locale.getDefault().language == "en") "ru" else "en"
-            setLocale(newLanguage, this)
-            recreate()
+        buttonChangeLanguage.setOnClickListener{
+                val currentLanguage = Locale.getDefault().language
+                val newLanguage = when (currentLanguage) {
+                    "en" -> "ru"
+                    "ru" -> "be"
+                    else -> "en"
+                }
+                setLocale(newLanguage, this)
+                recreate()
         }
     }
 }
