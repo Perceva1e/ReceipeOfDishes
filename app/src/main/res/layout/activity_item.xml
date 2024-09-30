@@ -13,7 +13,7 @@
         android:orientation="vertical">
     <TextView
         android:id="@+id/itemListTitleOne"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
@@ -27,8 +27,8 @@
 
     <ScrollView
         android:id="@+id/scrollView3"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
