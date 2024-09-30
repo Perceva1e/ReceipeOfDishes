@@ -1,20 +1,23 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/main">
+    android:layout_height="match_parent">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <Button
         android:id="@+id/buttonBack"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
-        android:layout_margin="15dp"
-        android:layout_marginTop="16dp"
-        android:padding="16dp"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:backgroundTint="#3A3A3A"
+        android:padding="16dp"
         android:text="@string/backward"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
         app:layout_constraintTop_toBottomOf="@+id/buttonSearch" />
 
@@ -31,8 +34,8 @@
 
     <Button
         android:id="@+id/buttonSearch"
-        android:layout_width="200dp"
-        android:layout_height="60dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:backgroundTint="#3A3A3A"
         android:padding="16dp"
@@ -80,4 +83,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="50dp" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

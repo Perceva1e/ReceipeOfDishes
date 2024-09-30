@@ -4,6 +4,7 @@ import FreeTranslateAPI
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -36,7 +37,6 @@ class AddRecipeActivity : BaseActivity() {
 
         translateApi = retrofit.create(FreeTranslateAPI::class.java)
         val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
-        val language = sharedPreferences.getString("My_Lang", "")
 
         buttonAddRecipe.setOnClickListener {
             val title = editTextTitle.text.toString().trim()
@@ -52,73 +52,134 @@ class AddRecipeActivity : BaseActivity() {
                 }
 
                 CoroutineScope(Dispatchers.Main).launch {
-                    val meal = recipeRepository.loadMealImageByName(title)
-                    if (meal != null) {
-                        translateText("en", targetLanguage, meal.strMeal, object : TranslationCallback {
-                            override fun onTranslationCompleted(translatedTitle: String) {
-                                translateText("en", targetLanguage, description, object : TranslationCallback {
-                                    override fun onTranslationCompleted(translatedDescription: String) {
-                                        val ingredients = listOf(
-                                            meal.strIngredient1 to meal.strMeasure1,
-                                            meal.strIngredient2 to meal.strMeasure2,
-                                            meal.strIngredient3 to meal.strMeasure3,
-                                            meal.strIngredient4 to meal.strMeasure4,
-                                            meal.strIngredient5 to meal.strMeasure5,
-                                            meal.strIngredient6 to meal.strMeasure6,
-                                            meal.strIngredient7 to meal.strMeasure7,
-                                            meal.strIngredient8 to meal.strMeasure8,
-                                            meal.strIngredient9 to meal.strMeasure9,
-                                            meal.strIngredient10 to meal.strMeasure10,
-                                            meal.strIngredient11 to meal.strMeasure11,
-                                            meal.strIngredient12 to meal.strMeasure12,
-                                            meal.strIngredient13 to meal.strMeasure13,
-                                            meal.strIngredient14 to meal.strMeasure14,
-                                            meal.strIngredient15 to meal.strMeasure15,
-                                            meal.strIngredient16 to meal.strMeasure16,
-                                            meal.strIngredient17 to meal.strMeasure17,
-                                            meal.strIngredient18 to meal.strMeasure18,
-                                            meal.strIngredient19 to meal.strMeasure19,
-                                            meal.strIngredient20 to meal.strMeasure20
-                                        ).filter { it.first != null && it.second != null && it.first!!.isNotEmpty() && it.second!!.isNotEmpty() }
-                                        translateText("en", targetLanguage, ingredients.joinToString(", ") { "${it.first}: ${it.second}" }, object : TranslationCallback {
-                                            override fun onTranslationCompleted(translatedIngredients: String) {
-                                                translateLongText("en", targetLanguage, meal.strInstructions, object : TranslationCallback {
-                                                    override fun onTranslationCompleted(translatedInstructions: String) {
-                                                        processRecipe(
-                                                            translatedTitle,
-                                                            translatedDescription,
-                                                            translatedIngredients,
-                                                            translatedInstructions,
-                                                            meal.strMealThumb,
-                                                            meal.strYoutube.toString()
-                                                        )
-                                                    }
+                    translateText(targetLanguage, "en", title, object : TranslationCallback {
+                        override fun onTranslationCompleted(translatedText: String) {
+                            Log.d("Translation", "Translated text: $translatedText")
+                            CoroutineScope(Dispatchers.Main).launch {
+                                val meal = recipeRepository.loadMealImageByName(translatedText)
+                                Log.d("Translation", "Find meal: $meal")
+                                if (meal != null) {
+                                    translateText(
+                                        "en",
+                                        targetLanguage,
+                                        meal.strMeal,
+                                        object : TranslationCallback {
+                                            override fun onTranslationCompleted(translatedTitle: String) {
+                                                translateText(
+                                                    "en",
+                                                    targetLanguage,
+                                                    description,
+                                                    object : TranslationCallback {
+                                                        override fun onTranslationCompleted(
+                                                            translatedDescription: String
+                                                        ) {
+                                                            val ingredients = listOf(
+                                                                meal.strIngredient1 to meal.strMeasure1,
+                                                                meal.strIngredient2 to meal.strMeasure2,
+                                                                meal.strIngredient3 to meal.strMeasure3,
+                                                                meal.strIngredient4 to meal.strMeasure4,
+                                                                meal.strIngredient5 to meal.strMeasure5,
+                                                                meal.strIngredient6 to meal.strMeasure6,
+                                                                meal.strIngredient7 to meal.strMeasure7,
+                                                                meal.strIngredient8 to meal.strMeasure8,
+                                                                meal.strIngredient9 to meal.strMeasure9,
+                                                                meal.strIngredient10 to meal.strMeasure10,
+                                                                meal.strIngredient11 to meal.strMeasure11,
+                                                                meal.strIngredient12 to meal.strMeasure12,
+                                                                meal.strIngredient13 to meal.strMeasure13,
+                                                                meal.strIngredient14 to meal.strMeasure14,
+                                                                meal.strIngredient15 to meal.strMeasure15,
+                                                                meal.strIngredient16 to meal.strMeasure16,
+                                                                meal.strIngredient17 to meal.strMeasure17,
+                                                                meal.strIngredient18 to meal.strMeasure18,
+                                                                meal.strIngredient19 to meal.strMeasure19,
+                                                                meal.strIngredient20 to meal.strMeasure20
+                                                            ).filter { it.first != null && it.second != null && it.first!!.isNotEmpty() && it.second!!.isNotEmpty() }
+                                                            translateText(
+                                                                "en",
+                                                                targetLanguage,
+                                                                ingredients.joinToString(", ") { "${it.first}: ${it.second}" },
+                                                                object : TranslationCallback {
+                                                                    override fun onTranslationCompleted(
+                                                                        translatedIngredients: String
+                                                                    ) {
+                                                                        translateLongText(
+                                                                            "en",
+                                                                            targetLanguage,
+                                                                            meal.strInstructions,
+                                                                            object :
+                                                                                TranslationCallback {
+                                                                                override fun onTranslationCompleted(
+                                                                                    translatedInstructions: String
+                                                                                ) {
+                                                                                    processRecipe(
+                                                                                        translatedTitle,
+                                                                                        translatedDescription,
+                                                                                        translatedIngredients,
+                                                                                        translatedInstructions,
+                                                                                        meal.strMealThumb,
+                                                                                        meal.strYoutube.toString()
+                                                                                    )
+                                                                                }
 
-                                                    override fun onTranslationFailed(errorMessage: String) {
-                                                        Toast.makeText(this@AddRecipeActivity, errorMessage, Toast.LENGTH_SHORT).show()
-                                                    }
-                                                })
+                                                                                override fun onTranslationFailed(
+                                                                                    errorMessage: String
+                                                                                ) {
+                                                                                    Toast.makeText(
+                                                                                        this@AddRecipeActivity,
+                                                                                        errorMessage,
+                                                                                        Toast.LENGTH_SHORT
+                                                                                    ).show()
+                                                                                }
+                                                                            })
+                                                                    }
+
+                                                                    override fun onTranslationFailed(
+                                                                        errorMessage: String
+                                                                    ) {
+                                                                        Toast.makeText(
+                                                                            this@AddRecipeActivity,
+                                                                            errorMessage,
+                                                                            Toast.LENGTH_SHORT
+                                                                        ).show()
+                                                                    }
+                                                                })
+                                                        }
+
+                                                        override fun onTranslationFailed(
+                                                            errorMessage: String
+                                                        ) {
+                                                            Toast.makeText(
+                                                                this@AddRecipeActivity,
+                                                                errorMessage,
+                                                                Toast.LENGTH_SHORT
+                                                            ).show()
+                                                        }
+                                                    })
                                             }
 
                                             override fun onTranslationFailed(errorMessage: String) {
-                                                Toast.makeText(this@AddRecipeActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(
+                                                    this@AddRecipeActivity,
+                                                    errorMessage,
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
                                             }
                                         })
-                                    }
-
-                                    override fun onTranslationFailed(errorMessage: String) {
-                                        Toast.makeText(this@AddRecipeActivity, errorMessage, Toast.LENGTH_SHORT).show()
-                                    }
-                                })
+                                } else {
+                                    Toast.makeText(
+                                        this@AddRecipeActivity,
+                                        "Meal not found",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
                             }
+                        }
 
-                            override fun onTranslationFailed(errorMessage: String) {
-                                Toast.makeText(this@AddRecipeActivity, errorMessage, Toast.LENGTH_SHORT).show()
-                            }
-                        })
-                    } else {
-                        Toast.makeText(this@AddRecipeActivity, "Meal not found", Toast.LENGTH_SHORT).show()
-                    }
+                        override fun onTranslationFailed(errorMessage: String) {
+                            Log.e("Translation", "Translation failed: $errorMessage")
+                        }
+                    }).toString()
                 }
             }
         }
@@ -150,7 +211,8 @@ class AddRecipeActivity : BaseActivity() {
             )
             dbHelper.addItem(userId, newItem)
 
-            Toast.makeText(this@AddRecipeActivity, "Recipe added successfully", Toast.LENGTH_LONG).show()
+            Toast.makeText(this@AddRecipeActivity, "Recipe added successfully", Toast.LENGTH_LONG)
+                .show()
             val intent = Intent(this@AddRecipeActivity, ItemsActivity::class.java)
             startActivity(intent)
             finish()

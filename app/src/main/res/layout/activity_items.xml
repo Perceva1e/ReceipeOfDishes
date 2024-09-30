@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F0F0F0"
     tools:context=".ItemsActivity">
-
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -30,7 +32,7 @@
         android:layout_marginTop="8dp"
         android:backgroundTint="#0D0243"
         android:text="@string/add_recipe"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
+        app:layout_constraintEnd_toStartOf="@+id/buttonCreateNewRecipe"
         app:layout_constraintHorizontal_bias="0.103"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
         app:layout_constraintTop_toBottomOf="@+id/textView"
@@ -48,7 +50,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
         app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+        app:layout_constraintStart_toEndOf="@+id/itemListButtonAdd"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="MissingConstraints" />
 
@@ -56,11 +58,10 @@
         android:id="@+id/findByIngredient"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#0D0243"
         android:text="@string/find_by_ingredient"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
-        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintEnd_toStartOf="@+id/buttonChangeLanguage"
         app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
         app:layout_constraintTop_toBottomOf="@+id/itemListButtonAdd" />
 
@@ -68,12 +69,12 @@
         android:id="@+id/buttonChangeLanguage"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="#CC0202"
         android:text="@string/change_language"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVertical2"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="@+id/guidelineVertical1"
+        app:layout_constraintHorizontal_bias="0.926"
+        app:layout_constraintStart_toEndOf="@+id/findByIngredient"
         app:layout_constraintTop_toBottomOf="@+id/buttonCreateNewRecipe" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -84,10 +85,9 @@
         android:layout_marginVertical="30dp"
         app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/findByIngredient"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.466" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVertical1"
@@ -116,5 +116,5 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_end="10dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

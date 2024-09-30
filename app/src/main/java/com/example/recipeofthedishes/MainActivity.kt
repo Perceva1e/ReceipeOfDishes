@@ -1,5 +1,6 @@
 package com.example.recipeofthedishes
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -46,6 +47,11 @@ class MainActivity : BaseActivity() {
                 val db = DbHelper(this, null)
                 db.addUser(user)
                 Toast.makeText(this, "User $checkUserName is added ", Toast.LENGTH_LONG).show()
+                val userId = db.getUserId(checkUserName, checkPassword)
+                saveUserId(userId)
+                Toast.makeText(this, "User $checkUserName is signed in", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, ItemsActivity::class.java)
+                startActivity(intent)
                 userName.text.clear()
                 userPassword.text.clear()
                 userEmail.text.clear()
@@ -62,5 +68,12 @@ class MainActivity : BaseActivity() {
                 setLocale(newLanguage, this)
                 recreate()
         }
+    }
+
+    private fun saveUserId(userId: Int) {
+        val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("user_id", userId)
+        editor.apply()
     }
 }

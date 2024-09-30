@@ -69,7 +69,6 @@ class AuthActivity : BaseActivity() {
             recreate()
         }
     }
-
     private fun saveUserId(userId: Int) {
         val sharedPreferences = getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
