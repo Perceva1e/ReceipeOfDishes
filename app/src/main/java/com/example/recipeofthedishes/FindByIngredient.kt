@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import data.CookbookModels
@@ -27,6 +28,7 @@ class FindByIngredient : BaseActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var mealAdapter: MealAdapter
     private lateinit var translateApi: FreeTranslateAPI
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +53,8 @@ class FindByIngredient : BaseActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         mealAdapter = MealAdapter()
         recyclerView.adapter = mealAdapter
+        val itemTouchHelper = ItemTouchHelper(mealAdapter.itemTouchHelperCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
         val buttonBack: Button = findViewById(R.id.buttonBack)
         buttonBack.setOnClickListener {
             val intent = Intent(this, ItemsActivity::class.java)
@@ -117,7 +121,6 @@ class FindByIngredient : BaseActivity() {
                         Toast.makeText(this@FindByIngredient, "Failed to get meals", Toast.LENGTH_SHORT).show()
                     }
                 }
-
                 override fun onFailure(call: Call<CookbookModels.MealResponse>, t: Throwable) {
                     Log.e("Meals", "Error: ${t.message}")
                     Toast.makeText(this@FindByIngredient, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
