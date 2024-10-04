@@ -13,7 +13,11 @@ import androidx.core.view.WindowInsetsCompat
 import java.util.Locale
 
 class MainActivity : BaseActivity() {
+    init {
+        System.loadLibrary("user_validation")
+    }
 
+    external fun validateUser(userName: String, userEmail: String, userPassword: String): String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -40,16 +44,14 @@ class MainActivity : BaseActivity() {
             val checkUserName = userName.text.toString().trim()
             val checkPassword = userPassword.text.toString().trim()
             val checkUserEmail = userEmail.text.toString().trim()
-            if (checkUserName == "" || checkPassword == "" || checkUserEmail == "") {
-                Toast.makeText(this, "Not all fields are filled in", Toast.LENGTH_LONG).show()
-            } else {
+            val validationMessage = validateUser(checkUserName, checkUserEmail, checkPassword)
+            Toast.makeText(this, validationMessage, Toast.LENGTH_LONG).show()
+            if (validationMessage == "User added and signed in") {
                 val user = User(checkUserName, checkUserEmail, checkPassword)
                 val db = DbHelper(this, null)
                 db.addUser(user)
-                Toast.makeText(this, "User $checkUserName is added ", Toast.LENGTH_LONG).show()
                 val userId = db.getUserId(checkUserName, checkPassword)
                 saveUserId(userId)
-                Toast.makeText(this, "User $checkUserName is signed in", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, ItemsActivity::class.java)
                 startActivity(intent)
                 userName.text.clear()
@@ -58,15 +60,16 @@ class MainActivity : BaseActivity() {
             }
         }
 
-        buttonChangeLanguage.setOnClickListener{
-                val currentLanguage = Locale.getDefault().language
-                val newLanguage = when (currentLanguage) {
-                    "en" -> "ru"
-                    "ru" -> "be"
-                    else -> "en"
-                }
-                setLocale(newLanguage, this)
-                recreate()
+
+        buttonChangeLanguage.setOnClickListener {
+            val currentLanguage = Locale.getDefault().language
+            val newLanguage = when (currentLanguage) {
+                "en" -> "ru"
+                "ru" -> "be"
+                else -> "en"
+            }
+            setLocale(newLanguage, this)
+            recreate()
         }
     }
 

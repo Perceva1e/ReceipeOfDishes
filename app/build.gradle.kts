@@ -9,6 +9,11 @@ android {
     compileSdk = 34
 
     defaultConfig {
+        externalNativeBuild {
+            cmake {
+                cppFlags ("")
+            }
+        }
         applicationId = "com.example.recipeofthedishes"
         minSdk = 24
         targetSdk = 34
@@ -17,7 +22,11 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-
+    externalNativeBuild {
+        cmake {
+            path ("src/main/cpp/CMakeLists.txt")
+        }
+    }
     buildTypes {
         release {
             isMinifyEnabled = false

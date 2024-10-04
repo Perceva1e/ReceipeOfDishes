@@ -46,7 +46,6 @@ class AuthActivity : BaseActivity() {
                 if (isAuth) {
                     val userId = db.getUserId(checkUserName, checkPassword)
                     saveUserId(userId)
-
                     Toast.makeText(this, "User $checkUserName is signed in", Toast.LENGTH_LONG).show()
                     val intent = Intent(this, ItemsActivity::class.java)
                     startActivity(intent)
