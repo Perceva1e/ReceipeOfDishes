@@ -12,6 +12,8 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,7 +30,7 @@ class FindByIngredient : BaseActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var mealAdapter: MealAdapter
     private lateinit var translateApi: FreeTranslateAPI
-
+    private lateinit var mealViewModel: MealViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +41,8 @@ class FindByIngredient : BaseActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        mealViewModel = ViewModelProvider(this).get(MealViewModel::class.java)
 
         val retrofit = Retrofit.Builder()
             .baseUrl("https://ftapi.pythonanywhere.com")
@@ -68,6 +72,10 @@ class FindByIngredient : BaseActivity() {
                 Toast.makeText(this, "Please enter an ingredient", Toast.LENGTH_SHORT).show()
             }
         }
+
+        mealViewModel.meals.observe(this, Observer { meals ->
+            mealAdapter.setMeals(meals)
+        })
     }
 
     private fun fetchMeals(ingredient: String) {
@@ -106,24 +114,31 @@ class FindByIngredient : BaseActivity() {
                 ) {
                     if (response.isSuccessful) {
                         response.body()?.meals?.let { meals ->
-                            val sharedPreferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+                            val sharedPreferences =
+                                getSharedPreferences("Settings", Context.MODE_PRIVATE)
                             val language = sharedPreferences.getString("My_Lang", "")
                             if (language == "ru" || language == "be") {
                                 Log.d("Meals", "Translating meal names")
                                 translateMealNames(meals, language!!)
                             } else {
                                 Log.d("Meals", "Setting meals in adapter")
-                                mealAdapter.setMeals(meals)
+                                mealViewModel.meals.postValue(meals)
                             }
                         }
                     } else {
                         Log.e("Meals", "Failed to get meals")
-                        Toast.makeText(this@FindByIngredient, "Failed to get meals", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@FindByIngredient,
+                            "Failed to get meals",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
+
                 override fun onFailure(call: Call<CookbookModels.MealResponse>, t: Throwable) {
                     Log.e("Meals", "Error: ${t.message}")
-                    Toast.makeText(this@FindByIngredient, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@FindByIngredient, "Error: ${t.message}", Toast.LENGTH_SHORT)
+                        .show()
                 }
             })
     }
@@ -140,7 +155,7 @@ class FindByIngredient : BaseActivity() {
                     completedRequests++
                     if (completedRequests == meals.size) {
                         runOnUiThread {
-                            mealAdapter.setMeals(translatedMeals)
+                            mealViewModel.meals.postValue(translatedMeals)
                         }
                     }
                 }
@@ -151,7 +166,7 @@ class FindByIngredient : BaseActivity() {
                     completedRequests++
                     if (completedRequests == meals.size) {
                         runOnUiThread {
-                            mealAdapter.setMeals(translatedMeals)
+                            mealViewModel.meals.postValue(translatedMeals)
                         }
                     }
                     Toast.makeText(this@FindByIngredient, errorMessage, Toast.LENGTH_SHORT).show()
@@ -185,15 +200,24 @@ class FindByIngredient : BaseActivity() {
                     try {
                         when {
                             responseBody?.destinationText != null -> {
-                                Log.d("Translation", "Translated Text: ${responseBody.destinationText}")
+                                Log.d(
+                                    "Translation",
+                                    "Translated Text: ${responseBody.destinationText}"
+                                )
                                 callback.onTranslationCompleted(responseBody.destinationText)
                             }
+
                             responseBody?.translations?.allTranslations != null -> {
-                                Log.d("Translation", "All Translations: ${responseBody.translations.allTranslations}")
-                                val firstTranslation = responseBody.translations.allTranslations[0][0]
+                                Log.d(
+                                    "Translation",
+                                    "All Translations: ${responseBody.translations.allTranslations}"
+                                )
+                                val firstTranslation =
+                                    responseBody.translations.allTranslations[0][0]
                                 Log.d("Translation", "First Translated Text: $firstTranslation")
                                 callback.onTranslationCompleted(firstTranslation.toString())
                             }
+
                             else -> {
                                 Log.e("Translation", "Translation failed: Empty response")
                                 callback.onTranslationFailed("Translation failed: Empty response")
@@ -217,3 +241,4 @@ class FindByIngredient : BaseActivity() {
         })
     }
 }
+

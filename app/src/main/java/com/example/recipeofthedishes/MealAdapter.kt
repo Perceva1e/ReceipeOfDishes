@@ -33,7 +33,6 @@ class MealAdapter : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
         Log.d("MealAdapter", "Meals set: ${meals.map { it.strMeal }}")
     }
 
-
     private fun decodeUnicode(unicodeStr: String): String {
         return unicodeStr.replace("\\\\u([0-9A-Fa-f]{4})".toRegex()) {
             val charCode = it.groupValues[1].toInt(16)
@@ -223,44 +222,72 @@ class MealAdapter : RecyclerView.Adapter<MealAdapter.MealViewHolder>() {
                                                                         override fun onTranslationCompleted(
                                                                             translatedIngredient: String
                                                                         ) {
-                                                                            translatedIngredients.add(
-                                                                                decodeUnicode(
-                                                                                    translatedIngredient
-                                                                                ) to measure
-                                                                            )
-                                                                            ingredientsTranslated++
-                                                                            if (ingredientsTranslated == ingredients.size) {
-                                                                                val newItem = Item(
-                                                                                    0,
-                                                                                    it.strMealThumb,
-                                                                                    it.strMeal,
-                                                                                    translatedIngredients.joinToString { "${it.first}: ${it.second}" },
-                                                                                    "",
-                                                                                    decodeUnicode(
-                                                                                        translatedInstructions
-                                                                                    ),
-                                                                                    it.strYoutube.toString()
-                                                                                )
-                                                                                dbHelper.addItem(
-                                                                                    userId,
-                                                                                    newItem
-                                                                                )
-                                                                                Toast.makeText(
-                                                                                    viewHolder.itemView.context,
-                                                                                    "Recipe added successfully",
-                                                                                    Toast.LENGTH_LONG
-                                                                                ).show()
-                                                                                meals =
-                                                                                    meals.toMutableList()
-                                                                                        .apply {
-                                                                                            removeAt(
+                                                                            translateText(
+                                                                                "en",
+                                                                                targetLanguage,
+                                                                                measure,
+                                                                                object :
+                                                                                    TranslationCallback {
+                                                                                    override fun onTranslationCompleted(
+                                                                                        translatedMeasure: String
+                                                                                    ) {
+                                                                                        translatedIngredients.add(
+                                                                                            decodeUnicode(
+                                                                                                translatedIngredient
+                                                                                            ) to decodeUnicode(
+                                                                                                translatedMeasure
+                                                                                            )
+                                                                                        )
+                                                                                        ingredientsTranslated++
+                                                                                        if (ingredientsTranslated == ingredients.size) {
+                                                                                            val newItem =
+                                                                                                Item(
+                                                                                                    0,
+                                                                                                    it.strMealThumb,
+                                                                                                    it.strMeal,
+                                                                                                    translatedIngredients.joinToString { "${it.first}: ${it.second}" },
+                                                                                                    "",
+                                                                                                    decodeUnicode(
+                                                                                                        translatedInstructions
+                                                                                                    ),
+                                                                                                    it.strYoutube.toString()
+                                                                                                )
+                                                                                            dbHelper.addItem(
+                                                                                                userId,
+                                                                                                newItem
+                                                                                            )
+                                                                                            Toast.makeText(
+                                                                                                viewHolder.itemView.context,
+                                                                                                "Recipe added successfully",
+                                                                                                Toast.LENGTH_LONG
+                                                                                            ).show()
+                                                                                            meals =
+                                                                                                meals.toMutableList()
+                                                                                                    .apply {
+                                                                                                        removeAt(
+                                                                                                            position
+                                                                                                        )
+                                                                                                    }
+                                                                                            notifyItemRemoved(
                                                                                                 position
                                                                                             )
                                                                                         }
-                                                                                notifyItemRemoved(
-                                                                                    position
-                                                                                )
-                                                                            }
+                                                                                    }
+
+                                                                                    override fun onTranslationFailed(
+                                                                                        errorMessage: String
+                                                                                    ) {
+                                                                                        Toast.makeText(
+                                                                                            viewHolder.itemView.context,
+                                                                                            "Translation failed: $errorMessage",
+                                                                                            Toast.LENGTH_LONG
+                                                                                        ).show()
+                                                                                        notifyItemChanged(
+                                                                                            position
+                                                                                        )
+                                                                                    }
+                                                                                }
+                                                                            )
                                                                         }
 
                                                                         override fun onTranslationFailed(
