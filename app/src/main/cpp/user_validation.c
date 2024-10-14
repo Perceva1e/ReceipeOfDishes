@@ -34,7 +34,6 @@ Java_com_example_recipeofthedishes_MainActivity_validateUser(JNIEnv *env, jobjec
         return (*env)->NewStringUTF(env, "Password must be at least 8 characters long and contain special characters");
     }
 
-    // Здесь можно добавить код для добавления пользователя в базу данных
 
     (*env)->ReleaseStringUTFChars(env, userName, cUserName);
     (*env)->ReleaseStringUTFChars(env, userEmail, cUserEmail);
